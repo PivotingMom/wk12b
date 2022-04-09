@@ -20,6 +20,7 @@ function makeActivity(){
 
 function makeActivitysuccess(response){
 console.log(response.data.activity);
+document.getElementById('activity').innerText=response.data.activity; //task 4
 }
 
 function makeActivityFailed(error){
@@ -29,4 +30,34 @@ function makeActivityFailed(error){
 document.getElementById('randomActivity').addEventListener('click', makeActivity);
 
 
-onclick="myFunction()" 
+
+
+//task 2
+function showParticipantActivity()
+        {
+            var selectedValue = document.getElementById("options").value;
+            console.log(selectedValue);
+          showActivity(selectedValue);
+        }
+
+
+function showActivity(participants=1){
+axios.request({
+    url:"http://www.boredapi.com/api/activity",
+    method:"GET",
+    params: {
+      participants: participants
+    },
+  }).then(showActivitySuccess).catch(showActivityFailed)
+}
+
+function showActivitySuccess(response){ 
+console.log(response);
+document.getElementById('activity').innerText=response.data.activity;
+}//task 3
+
+function showActivityFailed(error){
+  console.log(error);
+}
+
+document.getElementById('tryActivity').addEventListener('click', showParticipantActivity)
